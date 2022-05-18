@@ -8,6 +8,10 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
+
+Token Leandro: 5670074ed34ebca21f0641afa3f05a1ef7b2778f
+
+Token Felicity: 4179a1980713bdec37394229bca2901048d2871b
 """
 
 import os
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
 
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
 
     'cursos',
 ]
@@ -135,9 +140,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',
+        'user': '10/minute'
+    }
 }
