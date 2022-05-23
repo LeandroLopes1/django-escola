@@ -7,7 +7,7 @@ url_base_avaliacoes = 'http://127.0.0.1:8000/api/v1/avaliacoes/'
 
 resultado = requests.get(url_base_cursos, headers=headers)
 
-#  print(resultado.json())
+# print(resultado.json())
 
 # Testando se o endpoint está correto
 
